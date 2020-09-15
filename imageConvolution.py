@@ -88,7 +88,7 @@ if __name__ == '__main__':
         conv = convolution(kernel, img)
 
         fig, x = plt.subplots(1, 2)
-        x[0].imshow(img, cmap="gray", title="Imagem Original.")
+        x[0].imshow(img, cmap="gray")
         x[1].imshow(conv, cmap="gray")
         plt.show()
     elif filter == 'sobel':
