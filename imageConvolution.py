@@ -41,19 +41,18 @@ def kernel_normalization(kernel):
 
 
 def convolution(kernel, img):
-    linha, coluna = img.shape
-    linhak, colunak = kernel.shape
-    conv = np.zeros((linha, coluna))
-    aux = np.zeros((linhak, colunak))
-    img = np.pad(img, linhak // 2)
+    row, column = img.shape
+    row_kernel, column_kernel = kernel.shape
+    conv = np.zeros((row, column))
+    conv_aux = np.zeros((row_kernel, column_kernel))
+    img = np.pad(img, row_kernel // 2)
 
-    for i in tqdm(range(0, linha)):
-        for j in range(0, coluna):
-            for indexLinha in range(0, linhak):
-                for indexColuna in range(0, colunak):
-                    aux[indexLinha][indexColuna] = kernel[indexLinha, indexColuna] * img[i + indexLinha][
-                        j + indexColuna]
-            conv[i][j] = np.sum(aux)
+    for i_img in tqdm(range(0, row)):
+        for j_img in range(0, column):
+            for i_kernel in range(0, row_kernel):
+                for j_kernel in range(0, column_kernel):
+                    conv_aux[i_kernel][j_kernel] = kernel[i_kernel, j_kernel] * img[i_img + i_kernel][j_img + j_kernel]
+            conv[i_img][j_img] = np.sum(conv_aux)
 
     return conv
 
